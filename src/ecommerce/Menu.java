@@ -1,10 +1,17 @@
 package ecommerce;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+
+import ecommerce.model.ProdutoConcreto;
+import ecommerce.model.Produto;
 
 public class Menu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        List<Produto> produtos = new ArrayList<>();
         boolean continuar = true;
 
         while (continuar) {
@@ -14,13 +21,14 @@ public class Menu {
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
+            scanner.nextLine();  
 
             switch (opcao) {
                 case 1:
-                    // Chamar método para cadastrar produto
+                    cadastrarProduto(scanner, produtos);
                     break;
                 case 2:
-                    // Chamar método para listar produtos
+                    listarProdutos(produtos);
                     break;
                 case 3:
                     continuar = false;
@@ -29,6 +37,34 @@ public class Menu {
                 default:
                     System.out.println("Opção inválida! Tente novamente.");
                     break;
+            }
+        }
+
+        scanner.close();
+    }
+
+ 
+    private static void cadastrarProduto(Scanner scanner, List<Produto> produtos) {
+        System.out.print("Digite o nome do produto: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o preço do produto: ");
+        double preco = scanner.nextDouble();
+        scanner.nextLine();  
+
+        Produto produto = new ProdutoConcreto(nome, preco);
+        produtos.add(produto);
+
+        System.out.println("Produto cadastrado com sucesso!");
+    }
+
+  
+    private static void listarProdutos(List<Produto> produtos) {
+        if (produtos.isEmpty()) {
+            System.out.println("Nenhum produto cadastrado.");
+        } else {
+            System.out.println("Lista de Produtos:");
+            for (Produto produto : produtos) {
+                produto.exibirInformacoes();
             }
         }
     }
