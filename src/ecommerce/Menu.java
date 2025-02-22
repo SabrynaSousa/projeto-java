@@ -96,6 +96,9 @@ public class Menu {
 
     // Remover Produto
     private static void removerProduto(Scanner scanner) {
+    	 if (produtos.isEmpty()) {
+             System.out.println("Nenhum produto cadastrado.");
+         } else {
         System.out.print("Digite o nome do produto a ser removido: ");
         String nome = scanner.nextLine();
 
@@ -106,12 +109,16 @@ public class Menu {
             System.out.println("Produto não encontrado.");
         }
     }
+    }
 
     // Atualizar Produto
     private static void atualizarProduto(Scanner scanner) {
+    	 if (produtos.isEmpty()) {
+             System.out.println("Nenhum produto cadastrado.");
+         } else {
         System.out.print("Digite o nome do produto a ser atualizado: ");
         String nome = scanner.nextLine();
-
+         
         if (produtos.containsKey(nome)) {
             try {
                 System.out.print("Digite o novo preço: ");
@@ -130,4 +137,5 @@ public class Menu {
             System.out.println("Produto não encontrado.");
         }
     }
+}
 }
